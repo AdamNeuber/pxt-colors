@@ -23,11 +23,9 @@ const colorArray: Array<Color> = [
     { h: 60, s: 100, l: 50 }    
 ];
 
-const stripLength = 7;
 const hasColor = [1, 3, 5, 7, 5, 3, 1];
+const stripLength = hasColor.length;
 const strip = neopixel.create(DigitalPin.P0, stripLength, NeoPixelMode.RGB);
-
-
 
 basic.forever(function() {
     for (let i = 0; i < stripLength; i++) {
