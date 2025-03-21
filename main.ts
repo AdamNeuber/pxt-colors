@@ -5,16 +5,6 @@ type Color = {
     l: number; // lightness
 };
 
-
-function hslToRgb(h: number, s: number, l: number): [number, number, number] {
-    s /= 100;
-    l /= 100;
-    const k = (n: number) => (n + h / 30) % 12;
-    const a = s * Math.min(l, 1 - l);
-    const f = (n: number) => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
-    return [Math.round(f(0) * 255), Math.round(f(8) * 255), Math.round(f(4) * 255)];
-}
-
 const blackcolor: Color = { h: 0, s: 0, l: 0 };
 const colorArray: Array<Color> = [
     { h: 0, s: 100, l: 50 },    
@@ -36,8 +26,7 @@ basic.forever(function() {
         strip.clear();
 
         for (let j = place; j < place + count; j++) {
-            const [r, g, b] = hslToRgb(color.h, color.s, color.l);
-            strip.setPixelColor(j, neopixel.rgb(r, g, b));
+            strip.setPixelColor(j, neopixel.hsl(color.h, color.s, color.l));
         }
 
         strip.show();
