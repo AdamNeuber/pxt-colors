@@ -13,12 +13,27 @@ const colorArray: Array<Color> = [
     { h: 60, s: 100, l: 50 }    
 ];
 
-const hasColor = [1, 3, 5, 7, 5, 3, 1];
-const stripLength = hasColor.length;
-const strip = neopixel.create(DigitalPin.P0, stripLength, NeoPixelMode.RGB);
+let colorCount = 16
+let hasColor: Array<number> = [];
+
+for (let i = 0; i <= colorCount; i+=1) {
+    if(i % 2 !== 0) {
+        hasColor.push(i)
+    }
+}
+for (let i = 0; i <= colorCount; i += 1) {
+    if (i % 2 !== 0 && i !== 1 && i !== colorCount - 1) {
+        hasColor.unshift(i)
+    }
+}
+
+console.log(hasColor.join(", "))
+const stripLength = 17;
+const strip = neopixel.create(DigitalPin.P1, stripLength, NeoPixelMode.RGB);
+
 
 basic.forever(function() {
-    for (let i = 0; i < stripLength; i++) {
+    for (let i = 0; i < hasColor.length; i++) {
         const count = hasColor[i];
         const place = (stripLength - count) / 2;
         const color = colorArray[i % colorArray.length];
