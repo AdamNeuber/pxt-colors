@@ -27,7 +27,6 @@ for (let i = 0; i <= colorCount; i += 1) {
     }
 }
 
-console.log(hasColor.join(", "))
 const stripLength = 17;
 const strip = neopixel.create(DigitalPin.P1, stripLength, NeoPixelMode.RGB);
 
